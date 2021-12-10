@@ -1,0 +1,9 @@
+public static double test(){
+        double a=20.3.2.1;
+        int 1111bbbb=10;
+        System.out.println(a+b);
+        String str="helloWorld";
+        double c=124.、
+        a++;
+        return a+b+c;
+    }
