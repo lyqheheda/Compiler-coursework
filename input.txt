@@ -1,5 +1,6 @@
 void main(){
 int a,b;
-a=20;
+a=20;/*12
+*ffw/wede1231233*/
 b=21+a;
 }#

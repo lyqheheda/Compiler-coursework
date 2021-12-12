@@ -1,5 +1,4 @@
 import java.io.*;
-import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class Work {
@@ -8,9 +7,11 @@ public class Work {
     static int row=0,sum; //row 用于记录当前行数 ，sum 用于存储数字；
     static String storage="";  //用于存放输入后的总字符串
     //定义24个保留字
-    static String[] rwtab=new String[]{"if","else","while","do","void",
-            "int","float","double","for","break","return","continue"
+    static String[] keywords =new String[]{"int","long","char","short","float","double","do","static",
+            "struct","void","default","case","switch","continue","break","return","while","for","if","else"
     };
+
+
     public static void main(String[] args) throws Exception {
         String filePath = "D:\\codes\\compileCW\\input.txt";
         FileInputStream fin = new FileInputStream(filePath);
@@ -25,7 +26,9 @@ public class Work {
 
 
 
-//		System.out.println(storage);
+
+
+		System.out.println(storage);
 //        System.out.println("请输入C语言源程序字符串（以#结尾）：");
 //        enter();
         do{
@@ -34,10 +37,10 @@ public class Work {
 
                 case 0:
                     break;
-                case 1:
-                    System.out.println("case1("+case1+","+"“"+token+"”"+")");
+                case 1: //keywords
+                    System.out.println("("+case1+","+"“"+token+"”"+")");
                     break;
-                case 2:
+                case 2: // identifiers
                     System.out.println("case2("+case1+","+"“"+token+"”"+")");
                     break;
                 case 3:
@@ -71,15 +74,15 @@ public class Work {
 
         }
         if((ch>='a'&&ch<='z')||(ch>='A'&&ch<='Z')){         //可能是关键字或者自定义的标识符
-            while((ch>='0'&&ch<='9')||(ch>='a'&&ch<='z')||(ch>='A'&&ch<='Z')){
+            while((ch>='0'&&ch<='9')||(ch>='a'&&ch<='z')||(ch>='A'&&ch<='Z')||(ch=='_')){
                 token.append(ch);
                 ch=storage.charAt(index++);
             }
             index--;
 //            syn=1;       //默认为识别出的字符串为自定义的标识符，种别码为1
             String s=token.toString();
-            for(int i=0; i<rwtab.length; i++){
-                if(s.equals(rwtab[i])){
+            for(int i = 0; i< keywords.length; i++){
+                if(s.equals(keywords[i])){
                     return 1;
                 }
             }
@@ -151,9 +154,21 @@ public class Work {
                     token.append(ch);
                     ch=storage.charAt(index++);
                     if(ch=='/'){
-                        while(ch!=' '){
+                        token.deleteCharAt(token.length()-1);
+                        while(ch!='\n'){
                             ch=storage.charAt(index++);  //忽略掉注释，以空格为界定
+
                         }
+                        return 0;
+                    }
+                    else if(ch=='*'){     //忽略星号注释
+                        ch=storage.charAt(index++);
+                        char ch2=storage.charAt(index);
+                        while(ch!='*'||ch2!='/'){
+                            ch=storage.charAt(index++);
+                            ch2=storage.charAt(index);
+                        }
+                        index++;
                         return 0;
                     }
                     else{
@@ -161,11 +176,16 @@ public class Work {
                         index--;
                     }
                     return 4;
+
                 case '+':
 
                     token.append(ch);
                     return 4;
                 case '-':
+
+                    token.append(ch);
+                    return 4;
+                case '%':
 
                     token.append(ch);
                     return 4;
