@@ -38,19 +38,19 @@ public class Work {
                 case 0:
                     break;
                 case 1: //keywords
-                    System.out.println("("+case1+","+"“"+token+"”"+")");
+                    System.out.println("<"+case1+","+"“"+token+"”"+">");
                     break;
                 case 2: // identifiers
-                    System.out.println("case2("+case1+","+"“"+token+"”"+")");
+                    System.out.println("case2<"+case1+","+"“"+token+"”"+">");
                     break;
                 case 3:
-                    System.out.println("("+case1+","+"“"+sum+"“"+")");
+                    System.out.println("<"+case1+","+"“"+sum+"“"+">");
                     break;
                 case 4:
-                    System.out.println("("+case1+","+"“"+token+"”"+")");
+                    System.out.println("<"+case1+","+"“"+token+"”"+">");
                     break;
                 case 5:
-                    System.out.println("("+case1+","+"“"+token+"”"+")");
+                    System.out.println("<"+case1+","+"“"+token+"”"+">");
                     break;
                 case 6:
                     System.out.println("Error in row"+row+"!");
@@ -222,19 +222,5 @@ public class Work {
                     return 6;
             }
     }
-    /**
-     * 输入函数
-     */
-    public static  void enter() {
-        char ch;
-        String tempString=null;
-        Scanner sr=new Scanner(System.in);
-        do {
-            storage+="\n";
-            tempString=sr.nextLine();
-            storage+=tempString;
-            ch=tempString.charAt(tempString.length()-1);
-        }while(ch!='#');
-        sr.close();
-    }
+
 }
